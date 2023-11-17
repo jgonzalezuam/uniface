@@ -1,0 +1,35 @@
+Entry plObtenWebContext
+	variables
+		string vServerVars, vDatos, vElemento
+	endvariables
+
+	webactivate $instancename.oNavegador()
+
+	getitem/id vServerVars, $webinfo("WEBSERVERCONTEXT"), "SESSION"
+	vDatos = "session_xx=%%vServerVars-----"
+
+	getitem/id vServerVars, $webinfo("WEBSERVERCONTEXT"), "SERVERVARIABLES"
+
+	getitem/id vElemento, vServerVars, "REMOTE_ADDR"
+	vDatos = "%%vDatos%%%remote_addr_xx=%%vElemento-----"
+
+	getitem/id vElemento, vServerVars, "SERVER_NAME"
+	vDatos = "%%vDatos%%%server_name_xx=%%vElemento-----"
+
+	getitem/id vElemento, vServerVars, "SERVER_PORT"
+	vDatos = "%%vDatos%%%server_port_xx=%%vElemento-----"
+
+	getitem/id vElemento, vServerVars, "SERVER_PORT_SECURE"
+	vDatos = "%%vDatos%%%server_p_sec_xx=%%vElemento-----"
+
+	getitem/id vElemento, vServerVars, "SERVER_PROTOCOL"
+	vDatos = "%%vDatos%%%server_proto_xx=%%vElemento-----"
+
+	getitem/id vElemento, vServerVars, "REQUEST_URI"
+	vDatos = "%%vDatos%%%request_uri_xx=%%vElemento-----"
+
+	getitem/id vElemento, vServerVars, "REMOTE_HOST"
+	vDatos = "%%vDatos%%%remote_host_xx=%%vElemento"
+
+	cd_wsc.ED_CONTROL = vDatos
+end ; plObtenWebContext

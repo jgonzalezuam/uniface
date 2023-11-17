@@ -1,0 +1,30 @@
+entry pl_imprime
+	Variables
+		Numeric  vFound_nu
+		String   vDestino_xx, vPathDest_xx, vFile_xx, vPathOrig_xx
+	Endvariables
+	; Directorio Destino
+	vPathDest_xx = "C:\siiuam\archivos\CONSTANCIAS\POSGRADO"
+	vFound_nu = $lfileexists("%%vPathDest_xx")
+	if (vFound_nu = 0)  ; No existe directorio
+		ldircreate "%%vPathDest_xx"  ; 0:Exito   ; -13 Error	
+	endif
+	putmess "Constancia:%%constancia_cl.constancia  Reporte:EPCTR087"
+	SetOcc "AL_CONSTANCIA",1
+	while ($status > 0)
+		; Directorio Origen
+		vFile_xx     = "C-%%Constancia_cl.Constancia%%%-%%siglas_uni_xx.E_Unidad%%%-%%Matricula_Cl.Al_Constancia%%%.pdf" 
+		vPathOrig_xx = "C:\siiuam\archivos\%%vFile_XX"
+		filedump " ","%%vPathOrig_xx"
+		;;
+		;Parametros Matricula, Siglas de la Unidad, Numero de Constancia
+		activate "EPCTR087".Exec(unidad_cl.e_unidad, Matricula_Cl.Al_Constancia,siglas_uni_xx.e_unidad,Constancia_Cl.Al_Constancia,$trimestre_cl$, $$usuario_cl)
+		vDestino_xx = "%%vPathDest_xx%%%\%%vFile_xx"
+		putmess "ORIGEN  %%vPathOrig_xx ======== DESTINO  %%vDestino_xx" 
+		if (cd_duda_nu.e_unidad = 1)
+			vFound_nu = $lfileexists("%%vPathOrig_xx")
+			if (vFound_nu >0 ) FileMove "%%vPathOrig_xx","%%vDestino_xx"
+		endif
+		SetOcc "AL_CONSTANCIA",$curOcc(AL_CONSTANCIA)+1
+	Endwhile
+end

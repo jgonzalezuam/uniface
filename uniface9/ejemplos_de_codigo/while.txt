@@ -1,0 +1,11 @@
+	setocc "ED_RESPUESTAS_CUESTIONARIO",1
+	repeat
+		pStatus_cl_t = -1
+		call plAlmacenarOcurrencia(PREGUNTA_CL.ED_RESPUESTAS_CUESTIONARIO, SUBPREGUNTA_CL.ED_RESPUESTAS_CUESTIONARIO, respuesta_cl.ED_RESPUESTAS_CUESTIONARIO, respuesta_XX.ED_RESPUESTAS_CUESTIONARIO, pStatus_cl_t, pStatus_xx_t)
+		if(pStatus_cl_t != 0)
+			pPasa = 0
+		endif
+	setocc "ED_RESPUESTAS_CUESTIONARIO",($curocc(ED_RESPUESTAS_CUESTIONARIO)+1)
+	until($status<=0)
+
+

@@ -1,0 +1,12 @@
+params
+	Numeric 	pMatricula 	: IN	
+endparams
+
+variables
+	String 	vSql
+	Numeric vNivel 	
+endvariables
+
+vSql = "select nivel_al_cl from al_academico_g where matricula_cl = %%pMatricula"
+sql "%%vSql", "def"
+vNivel = $result

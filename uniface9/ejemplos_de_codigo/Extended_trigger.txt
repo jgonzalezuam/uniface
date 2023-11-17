@@ -1,0 +1,9 @@
+trigger onchange
+	public web    
+	if(pregunta_4_2_6.ED_SECCION4 == 1)
+		$fieldproperties(atr_pregunta_4_2_7.ED_SECCION4) = "!style:display=none"
+	else
+		$fieldproperties(atr_pregunta_4_2_7.ED_SECCION4) = "style:display=none"
+	endif
+	return 0
+end

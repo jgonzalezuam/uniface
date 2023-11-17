@@ -1,0 +1,13 @@
+Entry plListarRolesAsignados
+	clear/e "TIPO_CUENTA_WEB_R"
+	retrieve/e "TIPO_CUENTA_WEB_R"
+	if($status=0)
+		putlistitems/id vLista, tipo_cuenta_web_cl.TIPO_CUENTA_WEB_R, tipo_cuenta_web_de.TIPO_CUENTA_WEB_R
+		putitem/id vLista, "", "(Seleccione)"
+		sort/list vLista, "A"
+		cd_estado_civil_list.ED_CONTROL = edo_civil_cl.ALUMNO_V_PERS
+		$fieldvalrep(cd_estado_civil_list.ED_CONTROL) = vLista
+	else
+		putmess "No se ha encontrado registros para efectuar la consulta"
+	endif
+end

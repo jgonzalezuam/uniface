@@ -1,0 +1,17 @@
+Entry plMensaje
+	params
+		string  pMensaje : IN
+		numeric pTipoMsj : IN ; 1:Success, 2:Warning, 3:Danger
+	endparams
+
+	cd_mensaje.ED_CONTROL = pMensaje
+	$fieldproperties(ctrl_msj.ED_CONTROL) = "!style:display=none"
+	selectcase pTipoMsj
+		case 1
+			putitem/id $fieldproperties(ctrl_msj.ED_CONTROL), "html:class", "alert alert-success"
+		case 2
+			putitem/id $fieldproperties(ctrl_msj.ED_CONTROL), "html:class", "alert alert-warning"
+		case 3
+			putitem/id $fieldproperties(ctrl_msj.ED_CONTROL), "html:class", "alert alert-danger"
+	endselectcase
+end ; plMensaje

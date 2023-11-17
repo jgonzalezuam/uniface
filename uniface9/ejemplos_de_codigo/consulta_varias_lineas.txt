@@ -1,0 +1,9 @@
+read where "matricula_cl = %%cd_matricula_inp.ED_CONTROL %\
+AND estado_beca_cl = 6 %\
+AND exists %\
+	(select 1 %\
+	from tipo_becas tb %\
+	where tb.beca_activa_lo = 1 %\
+	AND tb.tipo_beca_cl = al_sol_beca.tipo_beca_cl)"
+
+
